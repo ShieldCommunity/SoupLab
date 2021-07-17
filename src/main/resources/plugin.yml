@@ -1,0 +1,4 @@
+name: SoupPvP
+version: ${project.version}
+main: me.jonakls.souppvp.SoupPvP
+authors: [ Jonakls ]
