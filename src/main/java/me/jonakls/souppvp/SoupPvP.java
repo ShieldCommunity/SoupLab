@@ -6,12 +6,8 @@ public final class SoupPvP extends JavaPlugin {
 
     @Override
     public void onEnable() {
-        // Plugin startup logic
+        PluginCore core = new PluginCore(this);
+        core.init();
 
-    }
-
-    @Override
-    public void onDisable() {
-        // Plugin shutdown logic
     }
 }
