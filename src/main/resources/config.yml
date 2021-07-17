@@ -1,0 +1,14 @@
+clear-on-join: true
+pickup-items: true
+fall-damage: true
+deny-saturation: true
+deny-drops: true
+items-on-join: true
+items-join:
+  kits:
+    material: CHEST
+    slot: 0
+    display: '&aKits &e(Right click)'
+    lore:
+      - '&7Open menu of kits, select'
+      - '&7one and go fight!'

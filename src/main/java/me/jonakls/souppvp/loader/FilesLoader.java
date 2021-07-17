@@ -7,36 +7,37 @@ import me.jonakls.souppvp.api.Loader;
 public class FilesLoader implements Loader {
 
     private final SoupPvP plugin;
-    private FileManager configFile;
-    private FileManager guiFile;
-    private FileManager langFile;
-    private FileManager kitsFile;
+    private FileManager config;
+    private FileManager gui;
+    private FileManager lang;
+    private FileManager kits;
 
     public FilesLoader(SoupPvP plugin){
         this.plugin = plugin;
     }
+
     @Override
     public void load() {
-        configFile = new FileManager(plugin, "config.yml");
-        guiFile = new FileManager(plugin, "gui.yml");
-        langFile = new FileManager(plugin , "lang.yml");
-        kitsFile = new FileManager(plugin, "kits.yml");
+        config = new FileManager(plugin, "config.yml");
+        gui = new FileManager(plugin, "gui.yml");
+        lang = new FileManager(plugin , "lang.yml");
+        kits = new FileManager(plugin, "kits.yml");
     }
 
 
-    public FileManager getConfigFile() {
-        return configFile;
+    public FileManager getConfig() {
+        return config;
     }
 
-    public FileManager getGuiFile() {
-        return guiFile;
+    public FileManager getGui() {
+        return gui;
     }
 
-    public FileManager getLangFile() {
-        return langFile;
+    public FileManager getLang() {
+        return lang;
     }
 
-    public FileManager getKitsFile() {
-        return kitsFile;
+    public FileManager getKits() {
+        return kits;
     }
 }
