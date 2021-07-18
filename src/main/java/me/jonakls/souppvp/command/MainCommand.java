@@ -5,6 +5,7 @@ import me.jonakls.souppvp.manager.FileManager;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
+import org.bukkit.entity.Player;
 
 public class MainCommand implements CommandExecutor{
 
@@ -19,10 +20,27 @@ public class MainCommand implements CommandExecutor{
         FileManager config = pluginCore.getFilesLoader().getConfig();
         FileManager lang = pluginCore.getFilesLoader().getLang();
 
-        if (args.length > 0) {
+        String prefix = lang.getString("prefix");
 
+        Player player = (Player) sender;
 
+        if (!(args.length > 0)) {
 
+            sender.sendMessage(prefix + lang.getString("error.unknown-command"));
+            return false;
+        }
+
+        switch (args[0].toLowerCase()){
+            case "reload":
+                sender.sendMessage(prefix + lang.getString("messages.reload"));
+                lang.reload();
+                config.reload();
+                pluginCore.getFilesLoader().getKits().reload();
+                pluginCore.getFilesLoader().getGui().reload();
+                break;
+            case "kits":
+                player.openInventory(pluginCore.getKitsGUI().kits());
+                break;
         }
 
         return false;
