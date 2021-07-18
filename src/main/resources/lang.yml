@@ -1,0 +1,5 @@
+prefix: '&8[&cSoupPvP&8] '
+messages:
+  reload: '&7All files has been reloaded.'
+error:
+  unknown-command: '&7This command does not exist.'

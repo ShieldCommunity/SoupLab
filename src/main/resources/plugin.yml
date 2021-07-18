@@ -2,3 +2,13 @@ name: SoupPvP
 version: ${project.version}
 main: me.jonakls.souppvp.SoupPvP
 authors: [ Jonakls ]
+commands:
+  soup:
+    aliases:
+      - soupvp
+    description: General command
+  kits:
+    aliases:
+      - kit
+      - pvp
+    description: Kit command

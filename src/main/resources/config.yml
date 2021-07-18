@@ -4,6 +4,7 @@ fall-damage: true
 deny-saturation: true
 deny-drops: true
 items-on-join: true
+deny-build: true
 items-join:
   kits:
     material: CHEST
@@ -12,3 +13,5 @@ items-join:
     lore:
       - '&7Open menu of kits, select'
       - '&7one and go fight!'
+signs:
+  soups: '&8[&cKitPvP&8];&cSoups'
