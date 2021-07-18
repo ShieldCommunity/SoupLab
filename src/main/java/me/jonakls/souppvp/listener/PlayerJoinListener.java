@@ -5,6 +5,8 @@ import me.jonakls.souppvp.PluginCore;
 import me.jonakls.souppvp.builders.ItemBuilder;
 import me.jonakls.souppvp.enums.StatusGame;
 import me.jonakls.souppvp.loader.FilesLoader;
+import org.bukkit.Bukkit;
+import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -47,6 +49,22 @@ public class PlayerJoinListener implements Listener {
         );
     }
 
+    @EventHandler
+    public void onJoinTeleport(PlayerJoinEvent event) {
+        FilesLoader file = pluginCore.getFilesLoader();
+
+        if(!file.getConfig().getBoolean("join-teleport")) return;
+        if (file.getConfig().contains("spawn.world")) {
+            event.getPlayer().teleport(new Location(
+                    Bukkit.getWorld(file.getConfig().getString("spawn.world")),
+                    file.getConfig().getDouble("spawn.x"),
+                    file.getConfig().getDouble("spawn.y"),
+                    file.getConfig().getDouble("spawn.z"),
+                    (float) file.getConfig().getDouble("spawn.yaw"),
+                    (float) file.getConfig().getDouble("spawn.pirch")
+            ));
+        }
+    }
 
 
 

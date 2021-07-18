@@ -2,9 +2,12 @@ package me.jonakls.souppvp.listener;
 
 import me.jonakls.souppvp.PluginCore;
 import me.jonakls.souppvp.builders.ItemBuilder;
+import me.jonakls.souppvp.builders.TitleBuilder;
 import me.jonakls.souppvp.enums.StatusGame;
 import me.jonakls.souppvp.loader.FilesLoader;
-import org.bukkit.Material;
+import me.jonakls.souppvp.manager.FileManager;
+import me.jonakls.souppvp.utils.CountdownTimer;
+import org.bukkit.*;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.PlayerDeathEvent;
@@ -20,7 +23,8 @@ public class PlayerDeathListener implements Listener {
 
     @EventHandler
     public void onDeath(PlayerDeathEvent event) {
-        FilesLoader file = pluginCore.getFilesLoader();
+        FileManager config = pluginCore.getFilesLoader().getConfig();
+        FileManager lang = pluginCore.getFilesLoader().getLang();
         event.getEntity().setMetadata("status", new FixedMetadataValue(pluginCore.getPlugin(), StatusGame.SPAWN));
         event.getEntity().spigot().respawn();
         event.setKeepInventory(true);
@@ -32,19 +36,80 @@ public class PlayerDeathListener implements Listener {
         event.setNewLevel(0);
         event.setDroppedExp(0);
 
+        String prefix = lang.getString("prefix");
+
         ItemBuilder builder = new ItemBuilder(
-                Material.valueOf(file.getConfig().getString("items-join.kits.material")),
+                Material.valueOf(config.getString("items-join.kits.material")),
                 1,
-                file.getConfig().getString("items-join.kits.display"),
-                file.getConfig().getStringList("items-join.kits.lore")
+                config.getString("items-join.kits.display"),
+                config.getStringList("items-join.kits.lore")
         );
 
         event.getEntity().getInventory().setItem(
-                file.getConfig().getInt("items-join.kits.slot"),
+                config.getInt("items-join.kits.slot"),
                 builder.getItem()
         );
 
+        TitleBuilder title = new TitleBuilder(
+                lang.getString("titles.player-death.title"),
+                lang.getString("titles.player-death.sub-title")
+        );
+
+        title.setTime(
+                lang.getInt("titles.player-death.fade-in"),
+                lang.getInt("titles.player-death.stay"),
+                lang.getInt("titles.player-death.fade-out")
+        );
+
+        CountdownTimer timer = new CountdownTimer(
+                pluginCore.getPlugin(),
+                config.getInt("respawn-time"),
+                () -> {
+                    title.send(event.getEntity());
+                    event.getEntity().setGameMode(GameMode.SPECTATOR);
+                    if (!(config.contains("spawn.world"))) {
+                        event.getEntity().sendMessage(prefix + lang.getString("error.no-spawn"));
+                        return;
+                    }
+
+                    event.getEntity().teleport(new Location(
+                            Bukkit.getWorld(config.getString("spawn.world")),
+                            config.getDouble("spawn.x"),
+                            config.getDouble("spawn.y"),
+                            config.getDouble("spawn.z"),
+                            (float) config.getDouble("spawn.yaw"),
+                            (float) config.getDouble("spawn.pirch")
+                    ));
+                },
+                () -> {
+                    event.getEntity().setGameMode(GameMode.SURVIVAL);
+                    if (!(config.contains("spawn.world"))) {
+                        event.getEntity().sendMessage(prefix + lang.getString("error.no-spawn"));
+                        return;
+                    }
+
+                    event.getEntity().teleport(new Location(
+                            Bukkit.getWorld(config.getString("spawn.world")),
+                            config.getDouble("spawn.x"),
+                            config.getDouble("spawn.y"),
+                            config.getDouble("spawn.z"),
+                            (float) config.getDouble("spawn.yaw"),
+                            (float) config.getDouble("spawn.pirch")
+                    ));
+
+                },
+                (t) -> {
+                    event.getEntity().sendMessage(prefix + lang.getString("messages.death-countdown").replace("%seconds%", ""+t.getSecondsLeft()));
+                    if (config.getBoolean("sounds.death-countdown.enable")) {
+                        event.getEntity().playSound(
+                                event.getEntity().getLocation(),
+                                Sound.valueOf(config.getString("sounds.death-countdown.sound")),
+                                (float) config.getDouble("sounds.death-countdown.vol"),
+                                (float) config.getDouble("sounds.death-countdown.pitch")
+                        );
+                    }
+                }
+        );
+        timer.scheduleTimer();
     }
-
-
 }
