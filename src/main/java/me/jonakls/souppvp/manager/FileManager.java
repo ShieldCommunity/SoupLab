@@ -7,6 +7,7 @@ import org.bukkit.plugin.Plugin;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.List;
 import java.util.logging.Level;
 
 public class FileManager extends YamlConfiguration {
@@ -77,5 +78,12 @@ public class FileManager extends YamlConfiguration {
         }
 
         return ChatColor.translateAlternateColorCodes('&', text);
+    }
+
+    @Override
+    public List<String> getStringList(String path) {
+        List<String> list = super.getStringList(path);
+        list.replaceAll(line -> ChatColor.translateAlternateColorCodes('&', line));
+        return list;
     }
 }
