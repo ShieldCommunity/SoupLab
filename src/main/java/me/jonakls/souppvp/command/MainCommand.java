@@ -1,14 +1,14 @@
 package me.jonakls.souppvp.command;
 
 import me.jonakls.souppvp.PluginCore;
-import me.jonakls.souppvp.enums.StatusGame;
 import me.jonakls.souppvp.manager.FileManager;
 import me.jonakls.souppvp.utils.Colorized;
+import org.bukkit.Bukkit;
+import org.bukkit.Location;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
-import org.bukkit.metadata.FixedMetadataValue;
 import org.bukkit.metadata.MetadataValue;
 
 import java.util.ArrayList;
@@ -57,6 +57,48 @@ public class MainCommand implements CommandExecutor{
                     player.sendMessage("Status-3: " + line.value().toString());
                 }
 
+                break;
+            case "setspawn":
+                if (!(config.contains("spawn.world"))) {
+
+                    config.set("spawn.world", player.getWorld().getName());
+                    config.set("spawn.x", player.getLocation().getX());
+                    config.set("spawn.y", player.getLocation().getY());
+                    config.set("spawn.z", player.getLocation().getZ());
+                    config.set("spawn.yaw", player.getLocation().getYaw());
+                    config.set("spawn.pitch", player.getLocation().getPitch());
+                    config.save();
+
+                    player.sendMessage(lang.getString("messages.set-spawn"));
+
+                    return true;
+                }
+
+                config.set("spawn.world", player.getWorld().getName());
+                config.set("spawn.x", player.getLocation().getX());
+                config.set("spawn.y", player.getLocation().getY());
+                config.set("spawn.z", player.getLocation().getZ());
+                config.set("spawn.yaw", player.getLocation().getYaw());
+                config.set("spawn.pitch", player.getLocation().getPitch());
+                config.save();
+
+                player.sendMessage(lang.getString("messages.change-spawn"));
+
+                break;
+            case "spawn":
+                if (!(config.contains("spawn.world"))) {
+                    player.sendMessage(prefix + lang.getString("error.no-spawn"));
+                    return true;
+                }
+
+                player.teleport(new Location(
+                        Bukkit.getWorld(config.getString("spawn.world")),
+                        config.getDouble("spawn.x"),
+                        config.getDouble("spawn.y"),
+                        config.getDouble("spawn.z"),
+                        (float) config.getDouble("spawn.yaw"),
+                        (float) config.getDouble("spawn.pirch")
+                ));
                 break;
             default:
                 List<String> help = new ArrayList<>();
