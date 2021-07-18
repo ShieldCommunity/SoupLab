@@ -1,23 +1,28 @@
 package me.jonakls.souppvp.listener;
 
 
+import me.jonakls.souppvp.PluginCore;
 import me.jonakls.souppvp.builders.ItemBuilder;
+import me.jonakls.souppvp.enums.StatusGame;
 import me.jonakls.souppvp.loader.FilesLoader;
 import org.bukkit.Material;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
+import org.bukkit.metadata.FixedMetadataValue;
 
 public class PlayerJoinListener implements Listener {
 
-    private final FilesLoader file;
+    private final PluginCore pluginCore;
 
-    public PlayerJoinListener(FilesLoader file) {
-        this.file = file;
+    public PlayerJoinListener(PluginCore pluginCore) {
+        this.pluginCore = pluginCore;
     }
 
     @EventHandler
     public void onJoinItems(PlayerJoinEvent event) {
+        FilesLoader file = pluginCore.getFilesLoader();
+        event.getPlayer().setMetadata("status", new FixedMetadataValue(pluginCore.getPlugin(), StatusGame.SPAWN));
         if (!file.getConfig().getBoolean("items-on-join")) return;
 
         if (file.getConfig().getBoolean("clear-on-join")){
