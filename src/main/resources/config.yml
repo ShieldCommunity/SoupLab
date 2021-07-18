@@ -1,10 +1,12 @@
 clear-on-join: true
 pickup-items: true
+join-teleport: true
 fall-damage: true
 deny-saturation: true
 deny-drops: true
 items-on-join: true
 deny-build: true
+respawn-time: 5
 items-join:
   kits:
     material: CHEST
@@ -15,3 +17,9 @@ items-join:
       - '&7one and go fight!'
 signs:
   soups: '&8[&cKitPvP&8];&cSoups'
+sounds:
+  death-countdown:
+    enable: true
+    sound: NOTE_SNARE_DRUM
+    vol: 10
+    pitch: 5

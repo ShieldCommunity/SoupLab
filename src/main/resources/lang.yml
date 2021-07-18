@@ -2,13 +2,23 @@ prefix: '&8[&cSoupPvP&8] '
 error:
   unknown-command: '&7This command does not exist.'
   already-kit: '&7You already have a kit on.'
+  no-spawn: '&7The spawn point is not yet defined'
 messages:
   reload: '&7All files has been reloaded.'
   select-kit: '&7You selected &c%kit%'
+  set-spawn: '&7Spawn point correctly defined'
+  change-spawn: '&7Spawn point correctly changed'
+  death-countdown: '&7You just died. Reappears in &c%seconds% &7seconds.'
 titles:
   select-kit:
     title: '&aYou select &c%kit%'
     sub-title: '&7Remember that soups help you regenerate'
+    fade-in: 20
+    stay: 20
+    fade-out: 20
+  player-death:
+    title: '&cYOU JUST DIED!'
+    sub-title: '&7Please wait for you to come back to life'
     fade-in: 20
     stay: 20
     fade-out: 20
