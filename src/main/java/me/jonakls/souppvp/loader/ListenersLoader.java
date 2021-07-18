@@ -20,14 +20,15 @@ public class ListenersLoader implements Loader {
     @Override
     public void load() {
         registerListeners(
-                new PlayerJoinListener(pluginCore.getFilesLoader()),
+                new PlayerJoinListener(pluginCore),
                 new PlayerInteractListener(pluginCore),
                 new PlayerDropItemListener(pluginCore.getFilesLoader()),
-                new InventoryClickListener(pluginCore.getFilesLoader()),
+                new InventoryClickListener(pluginCore),
                 new FoodChangeListener(pluginCore.getFilesLoader()),
                 new EntityDamageListener(pluginCore.getFilesLoader()),
                 new SignChangeListener(pluginCore.getFilesLoader()),
-                new BlockPlaceListener(pluginCore.getFilesLoader())
+                new BlockPlaceListener(pluginCore.getFilesLoader()),
+                new PlayerDeathListener(pluginCore)
         );
     }
 
