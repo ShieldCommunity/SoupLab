@@ -3,7 +3,7 @@ package me.jonakls.souppvp.loader;
 import me.jonakls.souppvp.PluginCore;
 import me.jonakls.souppvp.SoupPvP;
 import me.jonakls.souppvp.api.Loader;
-import me.jonakls.souppvp.listener.PlayerJoinListener;
+import me.jonakls.souppvp.listener.*;
 import org.bukkit.Bukkit;
 import org.bukkit.event.Listener;
 import org.bukkit.plugin.PluginManager;
@@ -20,7 +20,14 @@ public class ListenersLoader implements Loader {
     @Override
     public void load() {
         registerListeners(
-                new PlayerJoinListener(pluginCore.getFilesLoader())
+                new PlayerJoinListener(pluginCore.getFilesLoader()),
+                new PlayerInteractListener(pluginCore),
+                new PlayerDropItemListener(pluginCore.getFilesLoader()),
+                new InventoryClickListener(pluginCore.getFilesLoader()),
+                new FoodChangeListener(pluginCore.getFilesLoader()),
+                new EntityDamageListener(pluginCore.getFilesLoader()),
+                new SignChangeListener(pluginCore.getFilesLoader()),
+                new BlockPlaceListener(pluginCore.getFilesLoader())
         );
     }
 

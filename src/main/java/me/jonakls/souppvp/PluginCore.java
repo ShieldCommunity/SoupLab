@@ -1,5 +1,6 @@
 package me.jonakls.souppvp;
 
+import me.jonakls.souppvp.gui.KitsGUI;
 import me.jonakls.souppvp.loader.ManagerLoader;
 import me.jonakls.souppvp.api.Core;
 import me.jonakls.souppvp.api.Loader;
@@ -13,6 +14,7 @@ public class PluginCore implements Core{
 
     private FilesLoader filesLoader;
     private ManagerLoader managerLoader;
+    private KitsGUI kitsGUI;
 
     public PluginCore(SoupPvP plugin){
         this.plugin = plugin;
@@ -22,6 +24,8 @@ public class PluginCore implements Core{
     public void init() {
         filesLoader = new FilesLoader(plugin);
         filesLoader.load();
+
+        kitsGUI = new KitsGUI(filesLoader);
 
         managerLoader = new ManagerLoader(this);
         managerLoader.load();
@@ -49,5 +53,9 @@ public class PluginCore implements Core{
 
     public ManagerLoader getManagers(){
         return managerLoader;
+    }
+
+    public KitsGUI getKitsGUI() {
+        return kitsGUI;
     }
 }
