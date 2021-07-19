@@ -8,10 +8,15 @@ import me.jonakls.souppvp.loader.FilesLoader;
 import me.jonakls.souppvp.manager.FileManager;
 import me.jonakls.souppvp.utils.CountdownTimer;
 import org.bukkit.*;
+import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
+import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.metadata.FixedMetadataValue;
+
+import java.util.List;
+import java.util.Random;
 
 public class PlayerDeathListener implements Listener {
 
@@ -19,6 +24,42 @@ public class PlayerDeathListener implements Listener {
 
     public PlayerDeathListener(PluginCore pluginCore) {
         this.pluginCore = pluginCore;
+    }
+
+    @EventHandler
+    public void deathMessages(PlayerDeathEvent event) {
+        FileManager lang = pluginCore.getFilesLoader().getLang();
+        Player player = event.getEntity();
+        Player killer = player.getKiller();
+
+        String prefix = lang.getString("prefix");
+        Random random = new Random();
+        EntityDamageEvent.DamageCause damageCause = player.getLastDamageCause().getCause();
+        if (killer == null) {
+            if (damageCause.equals(EntityDamageEvent.DamageCause.FALL)) {
+                Bukkit.broadcastMessage(prefix + lang.getString("kill-messages.death-by-falldamage").replace("%player%", player.getName()));
+                return;
+            }
+            if (damageCause.equals(EntityDamageEvent.DamageCause.LAVA)) {
+                Bukkit.broadcastMessage(prefix + lang.getString("kill-messages.death-by-lava").replace("%player%", player.getName()));
+                return;
+            }
+            if (damageCause.equals(EntityDamageEvent.DamageCause.FIRE) || damageCause.equals(EntityDamageEvent.DamageCause.FIRE_TICK)) {
+                Bukkit.broadcastMessage(prefix + lang.getString("kill-messages.death-by-fire").replace("%player%", player.getName()));
+                return;
+            }
+            if (damageCause.equals(EntityDamageEvent.DamageCause.ENTITY_EXPLOSION) || damageCause.equals(EntityDamageEvent.DamageCause.BLOCK_EXPLOSION)) {
+                Bukkit.broadcastMessage(prefix + lang.getString("kill-messages.death-by-explosion").replace("%player%", player.getName()));
+                return;
+            }
+            Bukkit.broadcastMessage(prefix + lang.getString("kill-messages.death-by-unknown").replace("%player%", player.getName()));
+            return;
+        }
+        List<String> killsMessages = lang.getStringList("kill-messages.with-players");
+        Bukkit.broadcastMessage(prefix + killsMessages.get(random.nextInt(killsMessages.size()))
+                .replace("%player%", player.getName())
+                .replace("%killer%", killer.getName()));
+
     }
 
     @EventHandler

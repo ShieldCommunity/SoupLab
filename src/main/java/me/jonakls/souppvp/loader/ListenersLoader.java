@@ -28,7 +28,9 @@ public class ListenersLoader implements Loader {
                 new EntityDamageListener(pluginCore.getFilesLoader()),
                 new SignChangeListener(pluginCore.getFilesLoader()),
                 new BlockPlaceListener(pluginCore.getFilesLoader()),
-                new PlayerDeathListener(pluginCore)
+                new PlayerDeathListener(pluginCore),
+                new PlayerPickupListener(pluginCore),
+                new BlockBreakListener(pluginCore)
         );
     }
 

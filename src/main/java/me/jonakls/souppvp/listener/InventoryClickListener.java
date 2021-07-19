@@ -1,14 +1,13 @@
 package me.jonakls.souppvp.listener;
 
 import me.jonakls.souppvp.PluginCore;
-import me.jonakls.souppvp.enums.StatusGame;
 import me.jonakls.souppvp.handlers.KitHandler;
 import me.jonakls.souppvp.loader.FilesLoader;
+import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryClickEvent;
-import org.bukkit.metadata.FixedMetadataValue;
 
 public class InventoryClickListener implements Listener {
 
@@ -27,14 +26,14 @@ public class InventoryClickListener implements Listener {
         event.setCancelled(true);
 
         KitHandler handler = new KitHandler(pluginCore);
+
         for (String path : files.getKits().getConfigurationSection("kits").getKeys(false)) {
-            if (!event.getCurrentItem().getItemMeta().getDisplayName()
-                    .equals(files.getKits().getString("kits." + path + ".icon.display"))) return;
+            if (event.getCurrentItem().getItemMeta().getDisplayName()
+                    .equals(files.getKits().getString("kits." + path + ".icon.display"))) {
 
-            event.getWhoClicked().closeInventory();
-            handler.setPlayerKit((Player) event.getWhoClicked(), path);
-
-
+                event.getWhoClicked().closeInventory();
+                handler.setPlayerKit((Player) event.getWhoClicked(), path);
+            }
         }
     }
 
