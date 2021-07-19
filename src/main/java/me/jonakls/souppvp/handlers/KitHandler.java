@@ -6,6 +6,7 @@ import me.jonakls.souppvp.builders.TitleBuilder;
 import me.jonakls.souppvp.enums.StatusGame;
 import me.jonakls.souppvp.loader.FilesLoader;
 import me.jonakls.souppvp.utils.Colorized;
+import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
@@ -26,9 +27,7 @@ public class KitHandler {
     public void setPlayerKit(Player player, String kitName) {
         FilesLoader file = pluginCore.getFilesLoader();
         String prefix = file.getLang().getString("prefix");
-
         if (!player.hasMetadata("status")) return;
-
         for (MetadataValue meta : player.getMetadata("status")) {
 
             if (!meta.value().equals(StatusGame.SPAWN)) {
