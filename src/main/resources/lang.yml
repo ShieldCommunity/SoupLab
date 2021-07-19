@@ -9,6 +9,18 @@ messages:
   set-spawn: '&7Spawn point correctly defined'
   change-spawn: '&7Spawn point correctly changed'
   death-countdown: '&7You just died. Reappears in &c%seconds% &7seconds.'
+kill-messages:
+  death-by-falldamage: '&c%player% &7fell to his death!'
+  death-by-lava: '&c%player% &7thought he can swim in lava!'
+  death-by-fire: '&c%player% &7burned to death!'
+  death-by-explosion: '&c%player% &7was exploded into million pieces!'
+  death-by-unknown: '&c%player% &7has been killed by an &bUnknown Object!'
+  with-players:
+    - '&c%player% &7has been killed by &a%killer%'
+    - '&c%player% &7was brutally murdered by &a%killer%'
+    - '&c%player% &7weapon couldn''t stand against &a%killer%&7!'
+    - '&a%killer% &7gave a helping hand in &c%player% &7death!'
+    - '&a%killer% &7couldn''t resist killing &c%player%&7!'
 titles:
   select-kit:
     title: '&aYou select &c%kit%'
