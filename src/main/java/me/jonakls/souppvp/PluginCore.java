@@ -1,6 +1,8 @@
 package me.jonakls.souppvp;
 
 import me.jonakls.souppvp.gui.KitsGUI;
+import me.jonakls.souppvp.handlers.KillStreakHandler;
+import me.jonakls.souppvp.manager.KillStreakManager;
 import me.jonakls.souppvp.loader.ManagerLoader;
 import me.jonakls.souppvp.api.Core;
 import me.jonakls.souppvp.api.Loader;
@@ -14,7 +16,10 @@ public class PluginCore implements Core{
 
     private FilesLoader filesLoader;
     private ManagerLoader managerLoader;
+
     private KitsGUI kitsGUI;
+    private KillStreakManager killStreakManager;
+    private KillStreakHandler killStreakHandler;
 
     public PluginCore(SoupPvP plugin){
         this.plugin = plugin;
@@ -26,6 +31,8 @@ public class PluginCore implements Core{
         filesLoader.load();
 
         kitsGUI = new KitsGUI(filesLoader);
+        killStreakManager = new KillStreakManager();
+        killStreakHandler = new KillStreakHandler(filesLoader, killStreakManager);
 
         managerLoader = new ManagerLoader(this);
         managerLoader.load();
@@ -57,5 +64,13 @@ public class PluginCore implements Core{
 
     public KitsGUI getKitsGUI() {
         return kitsGUI;
+    }
+
+    public KillStreakManager getKillStreak() {
+        return killStreakManager;
+    }
+
+    public KillStreakHandler getKillStreakHandler(){
+        return killStreakHandler;
     }
 }
