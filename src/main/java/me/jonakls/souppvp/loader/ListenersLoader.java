@@ -30,7 +30,8 @@ public class ListenersLoader implements Loader {
                 new BlockPlaceListener(pluginCore.getFilesLoader()),
                 new PlayerDeathListener(pluginCore),
                 new PlayerPickupListener(pluginCore),
-                new BlockBreakListener(pluginCore)
+                new BlockBreakListener(pluginCore),
+                new PlayerQuitListener(pluginCore)
         );
     }
 
