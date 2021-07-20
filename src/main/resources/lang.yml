@@ -10,7 +10,7 @@ messages:
   change-spawn: '&7Spawn point correctly changed'
   death-countdown: '&7You just died. Reappears in &c%seconds% &7seconds.'
 kill-messages:
-  death-by-falldamage: '&c%player% &7fell to his death!'
+  death-by-fall-damage: '&c%player% &7fell to his death!'
   death-by-lava: '&c%player% &7thought he can swim in lava!'
   death-by-fire: '&c%player% &7burned to death!'
   death-by-explosion: '&c%player% &7was exploded into million pieces!'
@@ -21,6 +21,43 @@ kill-messages:
     - '&c%player% &7weapon couldn''t stand against &a%killer%&7!'
     - '&a%killer% &7gave a helping hand in &c%player% &7death!'
     - '&a%killer% &7couldn''t resist killing &c%player%&7!'
+kill-streaks:
+  broadcast: '&7Player &a%player% &7has a streak of &c%streak% &7kills'
+  kills-3:
+    title: '&cTRIPLE DEATH!'
+    subtitle: '&7You just killed 3 enemies'
+    rewards:
+      - 'give %player% golden_apple 1'
+  kills-5:
+    title: '&cPENTAKILL!'
+    subtitle: '&7You just killed 5 enemies'
+    rewards:
+      - 'give %player% golden_apple 1'
+  kills-10:
+    title: '&cSLAUGHTER!'
+    subtitle: '&7You just killed 10 enemies'
+    rewards:
+      - 'give %player% golden_apple 1'
+  kills-15:
+    title: '&cSERIAL KILLER!'
+    subtitle: '&7You just killed 15 enemies'
+    rewards:
+      - 'give %player% golden_apple 1'
+  kills-20:
+    title: '&cMANIAC!'
+    subtitle: '&7You just killed 20 enemies'
+    rewards:
+      - 'give %player% golden_apple 1'
+  kills-25:
+    title: '&cIT''S CRAZY!'
+    subtitle: '&7You just killed 25 enemies'
+    rewards:
+      - 'give %player% golden_apple 1'
+  kills-30:
+    title: '&cDAMN FRIEND!'
+    subtitle: '&7Hit the max kill streak'
+    rewards:
+      - 'give %player% golden_apple 1'
 titles:
   select-kit:
     title: '&aYou select &c%kit%'
