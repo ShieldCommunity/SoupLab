@@ -4,8 +4,9 @@ import me.jonakls.souppvp.PluginCore;
 import me.jonakls.souppvp.builders.ItemBuilder;
 import me.jonakls.souppvp.builders.TitleBuilder;
 import me.jonakls.souppvp.enums.StatusGame;
-import me.jonakls.souppvp.loader.FilesLoader;
+import me.jonakls.souppvp.handlers.KillStreakHandler;
 import me.jonakls.souppvp.manager.FileManager;
+import me.jonakls.souppvp.manager.KillStreakManager;
 import me.jonakls.souppvp.utils.CountdownTimer;
 import org.bukkit.*;
 import org.bukkit.entity.Player;
@@ -27,6 +28,22 @@ public class PlayerDeathListener implements Listener {
     }
 
     @EventHandler
+    public void killStreak(PlayerDeathEvent event) {
+        KillStreakManager killStreak = pluginCore.getKillStreak();
+        KillStreakHandler killStreakHandler = pluginCore.getKillStreakHandler();
+
+        Player player = event.getEntity();
+        Player killer = player.getKiller();
+
+        if (killer != null) {
+            killStreak.add(killer);
+            killStreak.reset(player);
+            killStreakHandler.actions(killer);
+        }
+
+    }
+
+    @EventHandler
     public void deathMessages(PlayerDeathEvent event) {
         FileManager lang = pluginCore.getFilesLoader().getLang();
         Player player = event.getEntity();
@@ -37,7 +54,7 @@ public class PlayerDeathListener implements Listener {
         EntityDamageEvent.DamageCause damageCause = player.getLastDamageCause().getCause();
         if (killer == null) {
             if (damageCause.equals(EntityDamageEvent.DamageCause.FALL)) {
-                Bukkit.broadcastMessage(prefix + lang.getString("kill-messages.death-by-falldamage").replace("%player%", player.getName()));
+                Bukkit.broadcastMessage(prefix + lang.getString("kill-messages.death-by-fall-damage").replace("%player%", player.getName()));
                 return;
             }
             if (damageCause.equals(EntityDamageEvent.DamageCause.LAVA)) {
@@ -119,7 +136,7 @@ public class PlayerDeathListener implements Listener {
                             config.getDouble("spawn.y"),
                             config.getDouble("spawn.z"),
                             (float) config.getDouble("spawn.yaw"),
-                            (float) config.getDouble("spawn.pirch")
+                            (float) config.getDouble("spawn.pitch")
                     ));
                 },
                 () -> {
@@ -135,7 +152,7 @@ public class PlayerDeathListener implements Listener {
                             config.getDouble("spawn.y"),
                             config.getDouble("spawn.z"),
                             (float) config.getDouble("spawn.yaw"),
-                            (float) config.getDouble("spawn.pirch")
+                            (float) config.getDouble("spawn.pitch")
                     ));
 
                 },
