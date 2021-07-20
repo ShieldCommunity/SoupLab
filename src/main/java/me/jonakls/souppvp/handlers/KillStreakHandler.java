@@ -19,6 +19,11 @@ public class KillStreakHandler {
     public void actions(Player player) {
 
         switch (manager.getStreak(player)){
+            case 3:
+                this.rewards(player, 3);
+                this.title(player, 3);
+                this.broadcast(player, 3);
+                break;
             case 5:
                 this.rewards(player, 5);
                 this.title(player, 5);
@@ -49,17 +54,18 @@ public class KillStreakHandler {
                 this.title(player, 30);
                 this.broadcast(player, 30);
                 break;
+            default:
+                player.setLevel(manager.getStreak(player));
+                break;
         }
 
     }
 
-
-
     private void rewards(Player player, int streak) {
-        Bukkit.dispatchCommand(
-                Bukkit.getConsoleSender(),"" + files.getLang().getString("kill-streaks.kills-" + streak + ".rewards")
-                        .replace("%player%", player.getName())
-        );
+
+        for (String command : files.getLang().getStringList("kill-streaks.kills-" + streak + ".rewards")) {
+            Bukkit.dispatchCommand(Bukkit.getConsoleSender(), command.replace("%player%", player.getName()));
+        }
     }
 
     private void broadcast(Player player, int streak) {
@@ -73,7 +79,11 @@ public class KillStreakHandler {
                 files.getLang().getString("kill-streaks.kills-" + streak + ".title"),
                 files.getLang().getString("kill-streaks.kills-" + streak + ".subtitle")
         );
-        builder.setTime(15, 15, 15);
+        builder.setTime(
+                files.getLang().getInt("kill-streaks.fade-in"),
+                files.getLang().getInt("kill-streaks.stay"),
+                files.getLang().getInt("kill-streaks.fade-out")
+        );
         builder.send(player);
     }
 }

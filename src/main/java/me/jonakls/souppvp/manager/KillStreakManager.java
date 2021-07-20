@@ -33,6 +33,7 @@ public class KillStreakManager {
             this.set(player, 0);
             currentStreak = 0;
         }
+        player.setLevel(currentStreak + 1);
         this.streakList.put(player.getUniqueId().toString(), currentStreak + 1);
     }
 
