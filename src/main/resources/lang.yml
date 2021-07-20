@@ -23,6 +23,9 @@ kill-messages:
     - '&a%killer% &7couldn''t resist killing &c%player%&7!'
 kill-streaks:
   broadcast: '&7Player &a%player% &7has a streak of &c%streak% &7kills'
+  fade-in: 20
+  stay: 20
+  fade-out: 20
   kills-3:
     title: '&cTRIPLE DEATH!'
     subtitle: '&7You just killed 3 enemies'
