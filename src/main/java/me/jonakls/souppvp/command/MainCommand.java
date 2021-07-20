@@ -31,8 +31,18 @@ public class MainCommand implements CommandExecutor{
         Player player = (Player) sender;
 
         if (!(args.length > 0)) {
+            List<String> help = new ArrayList<>();
 
-            sender.sendMessage(prefix + lang.getString("error.unknown-command"));
+            help.add(prefix + "&7help commands");
+            help.add("&c- /soup help &8| &7Show help commands");
+            help.add("&c- /soup reload &8| &7Reload all files of config");
+            help.add("&c- /soup kits &8| &7Open gui of kits");
+
+            for (String line : help) {
+
+                player.sendMessage(Colorized.apply(line));
+
+            }
             return false;
         }
 
@@ -90,18 +100,7 @@ public class MainCommand implements CommandExecutor{
                 ));
                 break;
             default:
-                List<String> help = new ArrayList<>();
-
-                help.add(prefix + "&7help commands");
-                help.add("&c- /soup help &8| &7Show help commands");
-                help.add("&c- /soup reload &8| &7Reload all files of config");
-                help.add("&c- /soup kits &8| &7Open gui of kits");
-
-                for (String line : help) {
-
-                    player.sendMessage(Colorized.apply(line));
-
-                }
+                sender.sendMessage(prefix + lang.getString("error.unknown-command"));
                 break;
         }
 
