@@ -20,6 +20,7 @@ public class MainCompleter implements TabCompleter {
             list.add("kits");
             list.add("setspawn");
             list.add("spawn");
+            list.add("editmode");
         }
 
         return list;

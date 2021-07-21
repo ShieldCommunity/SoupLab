@@ -1,6 +1,7 @@
 package me.jonakls.souppvp.command;
 
 import me.jonakls.souppvp.PluginCore;
+import me.jonakls.souppvp.enums.StatusGame;
 import me.jonakls.souppvp.manager.FileManager;
 import me.jonakls.souppvp.utils.Colorized;
 import org.bukkit.Bukkit;
@@ -9,6 +10,8 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
+import org.bukkit.metadata.FixedMetadataValue;
+import org.bukkit.metadata.MetadataValue;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -56,6 +59,22 @@ public class MainCommand implements CommandExecutor{
                 break;
             case "kits":
                 player.openInventory(pluginCore.getKitsGUI().kits());
+                break;
+            case "editmode":
+                if(player.hasMetadata("status")) {
+
+                    for (MetadataValue value : player.getMetadata("status")) {
+                        if (!value.value().equals(StatusGame.EDIT_MODE)) {
+                            player.setMetadata("status", new FixedMetadataValue(pluginCore.getPlugin(), StatusGame.EDIT_MODE));
+                            player.sendMessage(lang.getString("messages.enabled-edit-mode"));
+                            return true;
+                        }
+                        player.setMetadata("status", new FixedMetadataValue(pluginCore.getPlugin(), StatusGame.SPAWN));
+                        player.sendMessage(lang.getString("messages.disable-edit-mode"));
+                    }
+                    return true;
+                }
+
                 break;
             case "setspawn":
                 if (!(config.contains("spawn.world"))) {
