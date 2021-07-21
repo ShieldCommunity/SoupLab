@@ -1,9 +1,11 @@
 package me.jonakls.souppvp.listener;
 
 import me.jonakls.souppvp.PluginCore;
+import me.jonakls.souppvp.enums.StatusGame;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockBreakEvent;
+import org.bukkit.metadata.MetadataValue;
 
 public class BlockBreakListener implements Listener {
 
@@ -14,8 +16,17 @@ public class BlockBreakListener implements Listener {
     }
 
     @EventHandler
-    public void onBreak(BlockBreakEvent event) {
-        event.setCancelled(pluginCore.getFilesLoader().getConfig().getBoolean("deny-build"));
+    public void onBreakEdit(BlockBreakEvent event) {
+        if (event.getPlayer().hasMetadata("status")) {
+            for (MetadataValue value : event.getPlayer().getMetadata("status")) {
+                if (value.value().equals(StatusGame.EDIT_MODE)) {
+                    event.setCancelled(false);
+                    return;
+                }
+                event.setCancelled(pluginCore.getFilesLoader().getConfig().getBoolean("deny-build"));
+                return;
+            }
+        }
     }
 
 }
