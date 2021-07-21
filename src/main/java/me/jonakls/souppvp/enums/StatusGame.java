@@ -4,5 +4,5 @@ public enum StatusGame {
 
     IN_GAME,
     SPAWN,
-    EDITMODE
+    EDIT_MODE
 }
