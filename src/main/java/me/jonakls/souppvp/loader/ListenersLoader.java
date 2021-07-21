@@ -27,7 +27,7 @@ public class ListenersLoader implements Loader {
                 new FoodChangeListener(pluginCore.getFilesLoader()),
                 new EntityDamageListener(pluginCore.getFilesLoader()),
                 new SignChangeListener(pluginCore.getFilesLoader()),
-                new BlockPlaceListener(pluginCore.getFilesLoader()),
+                new BlockPlaceListener(pluginCore),
                 new PlayerDeathListener(pluginCore),
                 new PlayerPickupListener(pluginCore),
                 new BlockBreakListener(pluginCore),
