@@ -23,6 +23,7 @@ public class PlayerInteractListener implements Listener {
 
     @EventHandler
     public void onInteract(PlayerInteractEvent event) {
+        FileManager config = pluginCore.getFilesLoader().getConfig();
         if (!event.getAction().equals(Action.RIGHT_CLICK_AIR) && !event.getAction().equals(Action.RIGHT_CLICK_BLOCK)) return;
         if (event.getItem() == null) return;
         if (!event.getItem().getType().equals(Material.MUSHROOM_SOUP)) return;
@@ -33,7 +34,7 @@ public class PlayerInteractListener implements Listener {
         Player player = event.getPlayer();
         if (player.getHealth() == player.getMaxHealth()) return;
 
-        double health = player.getHealth() + 5;
+        double health = player.getHealth() + config.getDouble("regeneration-soup-value");
 
         if (health > player.getMaxHealth()){
 
