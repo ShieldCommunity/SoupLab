@@ -22,7 +22,7 @@ public class KitsGUI {
                 files.getGui().getString("kits.title")
         );
 
-        for (String path : files.getKits().getConfigurationSection("kits").getKeys(false)){
+        for (String path : files.getKits().getConfigurationSection("kits").getKeys(false)) {
 
             ItemBuilder builder = new ItemBuilder(
                     Material.valueOf(files.getKits().getString("kits." + path + ".icon.material")),
