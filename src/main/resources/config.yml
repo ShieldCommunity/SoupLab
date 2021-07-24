@@ -7,6 +7,7 @@ deny-drops: true
 items-on-join: true
 deny-build: true
 respawn-time: 5
+regeneration-soup-value: 5.0
 items-join:
   kits:
     material: CHEST
