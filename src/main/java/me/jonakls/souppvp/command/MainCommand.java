@@ -60,6 +60,13 @@ public class MainCommand implements CommandExecutor{
             case "kits":
                 player.openInventory(pluginCore.getKitsGUI().kits());
                 break;
+            case "stats":
+
+                player.sendMessage(Colorized.apply("&aYour stats &8| &c" + player.getName()));
+                player.sendMessage(" ");
+                player.sendMessage(Colorized.apply("&cKills: &f" + pluginCore.getPlayerData().getKills(player)));
+                player.sendMessage(Colorized.apply("&cDeaths: &f" + pluginCore.getPlayerData().getDeaths(player)));
+                break;
             case "editmode":
                 if(player.hasMetadata("status")) {
 
