@@ -11,6 +11,7 @@ import me.jonakls.souppvp.utils.CountdownTimer;
 import org.bukkit.*;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
+import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.PlayerDeathEvent;
@@ -39,6 +40,9 @@ public class PlayerDeathListener implements Listener {
 
             pluginCore.getPlayerData().incrementKills(killer);
             pluginCore.getPlayerData().incrementDeaths(player);
+            pluginCore.getPlayerData().incrementXp(killer);
+            pluginCore.getPlayerData().registerPlayer(player);
+            pluginCore.getPlayerData().registerPlayer(killer);
 
             killStreak.add(killer);
             killStreak.reset(player);
@@ -83,7 +87,7 @@ public class PlayerDeathListener implements Listener {
 
     }
 
-    @EventHandler
+    @EventHandler(priority = EventPriority.MONITOR)
     public void onDeath(PlayerDeathEvent event) {
         FileManager config = pluginCore.getFilesLoader().getConfig();
         FileManager lang = pluginCore.getFilesLoader().getLang();
