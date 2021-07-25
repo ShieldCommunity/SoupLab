@@ -9,6 +9,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.event.EventHandler;
+import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.metadata.FixedMetadataValue;
@@ -19,6 +20,11 @@ public class PlayerJoinListener implements Listener {
 
     public PlayerJoinListener(PluginCore pluginCore) {
         this.pluginCore = pluginCore;
+    }
+
+    @EventHandler(priority = EventPriority.MONITOR)
+    public void onJoinLoadData(PlayerJoinEvent event) {
+        pluginCore.getPlayerData().loadPlayerData(event.getPlayer());
     }
 
     @EventHandler
