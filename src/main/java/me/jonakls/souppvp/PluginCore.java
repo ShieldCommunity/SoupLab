@@ -35,7 +35,7 @@ public class PluginCore implements Core{
         kitsGUI = new KitsGUI(filesLoader);
         killStreakManager = new KillStreakManager();
         killStreakHandler = new KillStreakHandler(filesLoader, killStreakManager);
-        playerData = new PlayerData();
+        playerData = new PlayerData(this);
 
         managerLoader = new ManagerLoader(this);
         managerLoader.load();
