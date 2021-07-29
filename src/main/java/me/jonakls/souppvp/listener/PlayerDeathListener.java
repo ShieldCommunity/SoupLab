@@ -38,11 +38,11 @@ public class PlayerDeathListener implements Listener {
 
         if (killer != null) {
 
-            pluginCore.getPlayerData().incrementKills(killer);
-            pluginCore.getPlayerData().incrementDeaths(player);
-            pluginCore.getPlayerData().incrementXp(killer);
-            pluginCore.getPlayerData().registerPlayer(player);
-            pluginCore.getPlayerData().registerPlayer(killer);
+            pluginCore.getPlayerCache().incrementKills(killer);
+            pluginCore.getPlayerCache().incrementDeaths(player);
+            pluginCore.getPlayerCache().incrementXp(killer);
+            pluginCore.getPlayerCache().registerPlayer(player);
+            pluginCore.getPlayerCache().registerPlayer(killer);
 
             killStreak.add(killer);
             killStreak.reset(player);

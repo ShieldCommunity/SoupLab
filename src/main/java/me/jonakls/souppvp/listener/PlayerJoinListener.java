@@ -24,7 +24,7 @@ public class PlayerJoinListener implements Listener {
 
     @EventHandler(priority = EventPriority.MONITOR)
     public void onJoinLoadData(PlayerJoinEvent event) {
-        pluginCore.getPlayerData().loadPlayerData(event.getPlayer());
+        pluginCore.getPlayerCache().loadPlayerData(event.getPlayer());
     }
 
     @EventHandler
