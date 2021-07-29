@@ -1,15 +1,15 @@
 package me.jonakls.souppvp;
 
-import me.jonakls.souppvp.data.PlayerData;
-import me.jonakls.souppvp.gui.KitsGUI;
-import me.jonakls.souppvp.handlers.KillStreakHandler;
-import me.jonakls.souppvp.manager.KillStreakManager;
-import me.jonakls.souppvp.loader.ManagerLoader;
 import me.jonakls.souppvp.api.Core;
 import me.jonakls.souppvp.api.Loader;
+import me.jonakls.souppvp.gui.KitsGUI;
+import me.jonakls.souppvp.handlers.KillStreakHandler;
 import me.jonakls.souppvp.loader.CommandsLoader;
 import me.jonakls.souppvp.loader.FilesLoader;
 import me.jonakls.souppvp.loader.ListenersLoader;
+import me.jonakls.souppvp.loader.ManagerLoader;
+import me.jonakls.souppvp.manager.KillStreakManager;
+import me.jonakls.souppvp.storage.PlayerCache;
 
 public class PluginCore implements Core{
 
@@ -21,7 +21,7 @@ public class PluginCore implements Core{
     private KitsGUI kitsGUI;
     private KillStreakManager killStreakManager;
     private KillStreakHandler killStreakHandler;
-    private PlayerData playerData;
+    private PlayerCache playerCache;
 
     public PluginCore(SoupPvP plugin){
         this.plugin = plugin;
@@ -35,7 +35,7 @@ public class PluginCore implements Core{
         kitsGUI = new KitsGUI(filesLoader);
         killStreakManager = new KillStreakManager();
         killStreakHandler = new KillStreakHandler(filesLoader, killStreakManager);
-        playerData = new PlayerData(this);
+        playerCache = new PlayerCache(this);
 
         managerLoader = new ManagerLoader(this);
         managerLoader.load();
@@ -77,7 +77,7 @@ public class PluginCore implements Core{
         return killStreakHandler;
     }
 
-    public PlayerData getPlayerData() {
-        return playerData;
+    public PlayerCache getPlayerCache() {
+        return playerCache;
     }
 }

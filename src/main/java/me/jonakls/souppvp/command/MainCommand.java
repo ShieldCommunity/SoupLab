@@ -64,9 +64,9 @@ public class MainCommand implements CommandExecutor{
 
                 player.sendMessage(Colorized.apply("&aYour stats &8| &c" + player.getName()));
                 player.sendMessage(" ");
-                player.sendMessage(Colorized.apply("&cKills: &f" + pluginCore.getPlayerData().getKills(player)));
-                player.sendMessage(Colorized.apply("&cDeaths: &f" + pluginCore.getPlayerData().getDeaths(player)));
-                player.sendMessage(Colorized.apply("&cXp: &f" + pluginCore.getPlayerData().getXp(player) ));
+                player.sendMessage(Colorized.apply("&cKills: &f" + pluginCore.getPlayerCache().getKills(player)));
+                player.sendMessage(Colorized.apply("&cDeaths: &f" + pluginCore.getPlayerCache().getDeaths(player)));
+                player.sendMessage(Colorized.apply("&cXp: &f" + pluginCore.getPlayerCache().getXp(player) ));
                 break;
             case "editmode":
                 if(player.hasMetadata("status")) {
