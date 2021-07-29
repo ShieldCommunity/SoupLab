@@ -1,7 +1,6 @@
 package me.jonakls.souppvp.loader;
 
 import me.jonakls.souppvp.PluginCore;
-import me.jonakls.souppvp.command.KitsCommand;
 import me.jonakls.souppvp.command.MainCommand;
 import me.jonakls.souppvp.command.MainCompleter;
 import me.jonakls.souppvp.command.builder.ExecutorBuilder;
@@ -20,8 +19,7 @@ public class CommandsLoader implements Loader {
     @Override
     public void load() {
         registerCommands(
-                new ExecutorBuilder("soup", new MainCommand(pluginCore)),
-                new ExecutorBuilder("kits", new KitsCommand())
+                new ExecutorBuilder("soup", new MainCommand(pluginCore))
         );
 
         registerTabCompleter(
