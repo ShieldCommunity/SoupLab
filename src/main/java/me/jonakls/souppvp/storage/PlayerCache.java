@@ -2,6 +2,7 @@ package me.jonakls.souppvp.storage;
 
 import me.jonakls.souppvp.PluginCore;
 import me.jonakls.souppvp.manager.FileManager;
+import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
 import java.util.*;
@@ -11,16 +12,18 @@ public class PlayerCache {
     private final PluginCore pluginCore;
 
     private final List<Player> players;
+    private final Map<String, String> id;
     private final Map<String, Integer> kills;
     private final Map<String, Integer> deaths;
     private final Map<String, Integer> xp;
 
     public PlayerCache(PluginCore pluginCore) {
         this.pluginCore = pluginCore;
-        this.kills = new HashMap<String, Integer>(){};
-        this.deaths = new HashMap<String, Integer>(){};
-        this.xp = new HashMap<String, Integer>(){};
         this.players = new ArrayList<>();
+        this.id = new HashMap<>();
+        this.kills = new HashMap<>();
+        this.deaths = new HashMap<>();
+        this.xp = new HashMap<>();
     }
 
     public void savePlayerData() {
@@ -55,6 +58,7 @@ public class PlayerCache {
     public void registerPlayer(Player player) {
         if (players.contains(player)) return;
         players.add(player);
+        id.put(player.getName(), player.getUniqueId().toString());
     }
 
     public void incrementKills(Player player) {
@@ -109,6 +113,15 @@ public class PlayerCache {
             xpValue = 0;
         }
         return xpValue;
+    }
+
+    public String getId(Player player) {
+        String idValue = this.id.get(player.getName());
+        if (idValue == null) {
+            this.id.put(player.getName(), player.getName());
+            idValue = player.getName();
+        }
+        return idValue;
     }
 
 }

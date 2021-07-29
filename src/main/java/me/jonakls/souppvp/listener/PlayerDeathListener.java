@@ -3,7 +3,7 @@ package me.jonakls.souppvp.listener;
 import me.jonakls.souppvp.PluginCore;
 import me.jonakls.souppvp.builders.ItemBuilder;
 import me.jonakls.souppvp.builders.TitleBuilder;
-import me.jonakls.souppvp.enums.StatusGame;
+import me.jonakls.souppvp.enums.GameStatus;
 import me.jonakls.souppvp.handlers.KillStreakHandler;
 import me.jonakls.souppvp.manager.FileManager;
 import me.jonakls.souppvp.manager.KillStreakManager;
@@ -91,7 +91,7 @@ public class PlayerDeathListener implements Listener {
     public void onDeath(PlayerDeathEvent event) {
         FileManager config = pluginCore.getFilesLoader().getConfig();
         FileManager lang = pluginCore.getFilesLoader().getLang();
-        event.getEntity().setMetadata("status", new FixedMetadataValue(pluginCore.getPlugin(), StatusGame.SPAWN));
+        event.getEntity().setMetadata("status", new FixedMetadataValue(pluginCore.getPlugin(), GameStatus.SPAWN));
         event.getEntity().spigot().respawn();
         event.setKeepInventory(true);
         event.getEntity().getInventory().clear();

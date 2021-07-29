@@ -1,6 +1,6 @@
 package me.jonakls.souppvp.enums;
 
-public enum StatusGame {
+public enum GameStatus {
 
     IN_GAME,
     SPAWN,

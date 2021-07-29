@@ -1,7 +1,7 @@
 package me.jonakls.souppvp.command;
 
 import me.jonakls.souppvp.PluginCore;
-import me.jonakls.souppvp.enums.StatusGame;
+import me.jonakls.souppvp.enums.GameStatus;
 import me.jonakls.souppvp.manager.FileManager;
 import me.jonakls.souppvp.utils.Colorized;
 import org.bukkit.Bukkit;
@@ -50,6 +50,12 @@ public class MainCommand implements CommandExecutor{
         }
 
         switch (args[0].toLowerCase()){
+            case "save":
+                pluginCore.getStorage().insert(
+                        pluginCore.getPlayerCache(),
+                        player
+                );
+                break;
             case "reload":
                 lang.reload();
                 config.reload();
@@ -72,12 +78,12 @@ public class MainCommand implements CommandExecutor{
                 if(player.hasMetadata("status")) {
 
                     for (MetadataValue value : player.getMetadata("status")) {
-                        if (!value.value().equals(StatusGame.EDIT_MODE)) {
-                            player.setMetadata("status", new FixedMetadataValue(pluginCore.getPlugin(), StatusGame.EDIT_MODE));
+                        if (!value.value().equals(GameStatus.EDIT_MODE)) {
+                            player.setMetadata("status", new FixedMetadataValue(pluginCore.getPlugin(), GameStatus.EDIT_MODE));
                             player.sendMessage(lang.getString("messages.enabled-edit-mode"));
                             return true;
                         }
-                        player.setMetadata("status", new FixedMetadataValue(pluginCore.getPlugin(), StatusGame.SPAWN));
+                        player.setMetadata("status", new FixedMetadataValue(pluginCore.getPlugin(), GameStatus.SPAWN));
                         player.sendMessage(lang.getString("messages.disable-edit-mode"));
                     }
                     return true;

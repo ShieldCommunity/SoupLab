@@ -3,7 +3,7 @@ package me.jonakls.souppvp.listener;
 
 import me.jonakls.souppvp.PluginCore;
 import me.jonakls.souppvp.builders.ItemBuilder;
-import me.jonakls.souppvp.enums.StatusGame;
+import me.jonakls.souppvp.enums.GameStatus;
 import me.jonakls.souppvp.loader.FilesLoader;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
@@ -30,7 +30,7 @@ public class PlayerJoinListener implements Listener {
     @EventHandler
     public void onJoinItems(PlayerJoinEvent event) {
         FilesLoader file = pluginCore.getFilesLoader();
-        event.getPlayer().setMetadata("status", new FixedMetadataValue(pluginCore.getPlugin(), StatusGame.SPAWN));
+        event.getPlayer().setMetadata("status", new FixedMetadataValue(pluginCore.getPlugin(), GameStatus.SPAWN));
         if (!file.getConfig().getBoolean("items-on-join")) return;
 
         if (file.getConfig().getBoolean("clear-on-join")){

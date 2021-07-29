@@ -3,10 +3,8 @@ package me.jonakls.souppvp.handlers;
 import me.jonakls.souppvp.PluginCore;
 import me.jonakls.souppvp.builders.ItemBuilder;
 import me.jonakls.souppvp.builders.TitleBuilder;
-import me.jonakls.souppvp.enums.StatusGame;
+import me.jonakls.souppvp.enums.GameStatus;
 import me.jonakls.souppvp.loader.FilesLoader;
-import me.jonakls.souppvp.utils.Colorized;
-import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
@@ -30,7 +28,7 @@ public class KitHandler {
         if (!player.hasMetadata("status")) return;
         for (MetadataValue meta : player.getMetadata("status")) {
 
-            if (!meta.value().equals(StatusGame.SPAWN)) {
+            if (!meta.value().equals(GameStatus.SPAWN)) {
                 player.sendMessage(prefix + file.getLang().getString("error.already-kit"));
                 return;
             }
@@ -58,7 +56,7 @@ public class KitHandler {
 
             player.sendMessage(prefix + file.getLang().getString("messages.select-kit").replace("%kit%", kitName));
 
-            player.setMetadata("status", new FixedMetadataValue(pluginCore.getPlugin(), StatusGame.IN_GAME));
+            player.setMetadata("status", new FixedMetadataValue(pluginCore.getPlugin(), GameStatus.IN_GAME));
 
             for (String path : file.getKits().getConfigurationSection("kits").getKeys(false)) {
 
