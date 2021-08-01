@@ -31,6 +31,36 @@ public class MainCommand implements CommandExecutor{
 
         String prefix = lang.getString("prefix");
 
+        if (!(sender instanceof Player)) {
+
+            if (!(args.length > 0)) {
+                List<String> help = new ArrayList<>();
+
+                help.add(prefix + "&7help commands");
+                help.add("&c- /soup help &8| &7Show help commands");
+                help.add("&c- /soup reload &8| &7Reload all files of config");
+                help.add("&c- /soup kits &8| &7Open gui of kits");
+
+                for (String line : help) {
+
+                    sender.sendMessage(Colorized.apply(line));
+
+                }
+                return false;
+            }
+
+            if ("reload".equalsIgnoreCase(args[0])) {
+                lang.reload();
+                config.reload();
+                pluginCore.getFilesLoader().getKits().reload();
+                pluginCore.getFilesLoader().getGui().reload();
+                sender.sendMessage(prefix + lang.getString("messages.reload"));
+                return true;
+            }
+            sender.sendMessage(prefix + lang.getString("error.unknown-command"));
+            return true;
+        }
+
         Player player = (Player) sender;
 
         if (!(args.length > 0)) {
@@ -101,7 +131,7 @@ public class MainCommand implements CommandExecutor{
                     config.set("spawn.pitch", player.getLocation().getPitch());
                     config.save();
 
-                    player.sendMessage(lang.getString("messages.set-spawn"));
+                    player.sendMessage(prefix + lang.getString("messages.set-spawn"));
 
                     return true;
                 }
@@ -114,7 +144,7 @@ public class MainCommand implements CommandExecutor{
                 config.set("spawn.pitch", player.getLocation().getPitch());
                 config.save();
 
-                player.sendMessage(lang.getString("messages.change-spawn"));
+                player.sendMessage(prefix + lang.getString("messages.change-spawn"));
 
                 break;
             case "spawn":
