@@ -8,10 +8,10 @@ kits:
         - '&7Basic pvp kit, contains'
         - '&7basic armor and army'
     armor:
-      head: 'IRON_HELMET'
-      body: 'IRON_CHESTPLATE'
-      leggins: 'IRON_LEGGINGS'
-      boats: 'IRON_BOOTS'
+      head: 'IRON_HELMET;1;&aPvP;DURABILITY:3'
+      body: 'IRON_CHESTPLATE;1;&aPvP;DURABILITY:3'
+      leggins: 'IRON_LEGGINGS;1;&aPvP;DURABILITY:3'
+      boats: 'IRON_BOOTS;1;&aPvP;DURABILITY:3'
     items:
       - 'DIAMOND_SWORD;1'
       - 'MUSHROOM_SOUP;1'
@@ -59,13 +59,13 @@ kits:
         - '&7your enemies, but you only'
         - '&7have a piece of stone and a bow'
     armor:
-      head: 'LEATHER_HELMET'
-      body: 'LEATHER_CHESTPLATE'
-      leggins: 'LEATHER_LEGGINGS'
-      boats: 'LEATHER_BOOTS'
+      head: 'LEATHER_HELMET;1;&aArcher;DURABILITY:3'
+      body: 'LEATHER_CHESTPLATE;1;&aArcher;DURABILITY:3'
+      leggins: 'LEATHER_LEGGINGS;1;&aArcher;DURABILITY:3'
+      boats: 'LEATHER_BOOTS;1;&aArcher;DURABILITY:3'
     items:
-      - 'STONE_SWORD;1'
-      - 'BOW;1'
+      - 'STONE_SWORD;1;&cSword;DURABILITY:3;DAMAGE_ALL:1'
+      - 'BOW;1;&aLegolas;ARROW_DAMAGE:1'
       - 'MUSHROOM_SOUP;1'
       - 'MUSHROOM_SOUP;1'
       - 'MUSHROOM_SOUP;1'
@@ -116,7 +116,7 @@ kits:
       leggins: 'DIAMOND_LEGGINGS'
       boats: 'DIAMOND_BOOTS'
     items:
-      - 'STONE_SWORD;1'
+      - 'STONE_SWORD;1;&cSword;DURABILITY:3;DAMAGE_ALL:1'
       - 'MUSHROOM_SOUP;1'
       - 'MUSHROOM_SOUP;1'
       - 'MUSHROOM_SOUP;1'
