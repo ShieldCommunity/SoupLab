@@ -103,6 +103,7 @@ public class PluginCore implements Core{
     public DataStorage getStorage() {
         return storage;
     }
+
     public GameScoreboard gameScoreboard(){
         return gameScoreboard;
     }
