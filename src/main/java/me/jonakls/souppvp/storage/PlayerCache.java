@@ -16,6 +16,7 @@ public class PlayerCache {
     private final Map<String, Integer> kills;
     private final Map<String, Integer> deaths;
     private final Map<String, Integer> xp;
+    private final Map<String, List<String>> kits;
 
     public PlayerCache(PluginCore pluginCore) {
         this.pluginCore = pluginCore;
@@ -24,35 +25,17 @@ public class PlayerCache {
         this.kills = new HashMap<>();
         this.deaths = new HashMap<>();
         this.xp = new HashMap<>();
+        this.kits = new HashMap<>();
     }
 
     public void savePlayerData() {
-        FileManager data = pluginCore.getFilesLoader().getData();
 
-        for (Player player : players) {
-            data.set("data." + player.getName() + ".uuid", player.getUniqueId().toString());
-            data.set("data." + player.getName() + ".kills", this.getKills(player));
-            data.set("data." + player.getName() + ".deaths", this.getDeaths(player));
-            data.set("data." + player.getName() + ".xp", this.getXp(player));
-            data.save();
-        }
+
     }
 
     public void loadPlayerData(Player player) {
-        FileManager data = pluginCore.getFilesLoader().getData();
-        Set<String> paths = data.getConfigurationSection("data").getKeys(false);
 
-        if (players.contains(player)) return;
-        this.registerPlayer(player);
 
-        for (String name : paths) {
-
-            if(name.equals(player.getName())) {
-                this.kills.put(name, data.getInt("data." + name + ".kills"));
-                this.deaths.put(name, data.getInt("data." + name + ".deaths"));
-                this.xp.put(name, data.getInt("data." + name + ".xp"));
-            }
-        }
     }
 
     public void registerPlayer(Player player) {
