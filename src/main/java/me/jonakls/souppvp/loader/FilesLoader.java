@@ -11,7 +11,6 @@ public class FilesLoader implements Loader {
     private FileManager gui;
     private FileManager lang;
     private FileManager kits;
-    private FileManager data;
 
     public FilesLoader(SoupPvP plugin){
         this.plugin = plugin;
@@ -23,7 +22,6 @@ public class FilesLoader implements Loader {
         gui = new FileManager(plugin, "gui.yml");
         lang = new FileManager(plugin , "lang.yml");
         kits = new FileManager(plugin, "kits.yml");
-        data = new FileManager(plugin, "data.yml");
     }
 
 
@@ -41,9 +39,5 @@ public class FilesLoader implements Loader {
 
     public FileManager getKits() {
         return kits;
-    }
-
-    public FileManager getData() {
-        return data;
     }
 }
