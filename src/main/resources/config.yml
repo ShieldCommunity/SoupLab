@@ -28,6 +28,6 @@ sounds:
 commands:
   enable: true
   allow-commands:
-    - 'soup'
-    - 'kits'
-    - 'kit'
+    - '/soup'
+    - '/kits'
+    - '/kit'
