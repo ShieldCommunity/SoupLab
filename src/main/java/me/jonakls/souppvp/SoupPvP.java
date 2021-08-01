@@ -24,7 +24,7 @@ public final class SoupPvP extends JavaPlugin {
 
     @Override
     public void onDisable() {
-        this.core.getPlayerCache().savePlayerData();
+        this.core.getPlayerCache().forceSaveData();
         this.core.closeDatabase();
     }
 }
