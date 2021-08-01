@@ -25,3 +25,9 @@ sounds:
     sound: NOTE_SNARE_DRUM
     vol: 10
     pitch: 5
+commands:
+  enable: true
+  allow-commands:
+    - 'soup'
+    - 'kits'
+    - 'kit'
