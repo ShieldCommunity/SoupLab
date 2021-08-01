@@ -62,21 +62,18 @@ public class KitHandler {
 
                 if (path.toLowerCase().equals(kitName)) {
 
-                    inventory.setHelmet(new ItemStack(
-                            Material.valueOf(file.getKits().getString("kits." + path + ".armor.head"))
-                    ));
+                    ItemBuilder helmet = new ItemBuilder(file.getKits().getString("kits." + path + ".armor.head").split(";"));
+                    ItemBuilder body = new ItemBuilder(file.getKits().getString("kits." + path + ".armor.body").split(";"));
+                    ItemBuilder leggins = new ItemBuilder(file.getKits().getString("kits." + path + ".armor.leggins").split(";"));
+                    ItemBuilder boats = new ItemBuilder(file.getKits().getString("kits." + path + ".armor.boats").split(";"));
 
-                    inventory.setChestplate(new ItemStack(
-                            Material.valueOf(file.getKits().getString("kits." + path + ".armor.body"))
-                    ));
+                    inventory.setHelmet(helmet.getItem());
 
-                    inventory.setLeggings(new ItemStack(
-                            Material.valueOf(file.getKits().getString("kits." + path + ".armor.leggins"))
-                    ));
+                    inventory.setChestplate(body.getItem());
 
-                    inventory.setBoots(new ItemStack(
-                            Material.valueOf(file.getKits().getString("kits." + path + ".armor.boats"))
-                    ));
+                    inventory.setLeggings(leggins.getItem());
+
+                    inventory.setBoots(boats.getItem());
 
                     List<String> items = file.getKits().getStringList("kits." + path + ".items");
 
@@ -84,7 +81,7 @@ public class KitHandler {
 
                         String[] strings = items.get(i).split(";");
 
-                        ItemBuilder itemBuilder = new ItemBuilder(Material.valueOf(strings[0]), Integer.parseInt(strings[1]));
+                        ItemBuilder itemBuilder = new ItemBuilder(strings);
 
                         inventory.setItem(i, itemBuilder.getItem());
 
