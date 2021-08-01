@@ -7,7 +7,6 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
@@ -58,27 +57,27 @@ public class DataStorage {
         });
     }
 
-    public CompletableFuture<PlayerCache> select(String id) {
-        return CompletableFuture.supplyAsync(() -> {
-
+    public int getKills(String id) {
+        EXECUTOR.submit(() -> {
             try {
                 Connection con = connection.getConnection();
                 PreparedStatement statement = con.prepareStatement(
-                        "SELECT * FROM soup WHERE id = ?"
+                        "SELECT * FROM soup WHERE id = " + id
                 );
+                statement.executeQuery();
 
-                statement.setString(1, id);
-                ResultSet result = statement.executeQuery();
+                ResultSet result = statement.getResultSet();
 
-                result.getString("id");
-
-
-
+                if(result.getString("id").equals(id)) {
+                    return Integer.parseInt(result.getString("kills"));
+                }
+                return 0;
             }catch (SQLException e) {
                 e.printStackTrace();
             }
-            return null;
-        }, EXECUTOR);
+            return 0;
+        });
+        return 0;
     }
 
 }
