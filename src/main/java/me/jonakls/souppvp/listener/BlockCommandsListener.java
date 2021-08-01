@@ -20,11 +20,13 @@ public class BlockCommandsListener implements Listener {
     @EventHandler
     public void onCommandExecute(PlayerCommandPreprocessEvent event) {
         if (!(config.getBoolean("commands.enable"))) return;
-        Bukkit.broadcastMessage(event.getMessage());
 
         for(String command : config.getStringList("commands.allow-commands")) {
 
-            if(!command.equalsIgnoreCase(event.getMessage())) {
+            Bukkit.broadcastMessage("To event: " + event.getMessage());
+            Bukkit.broadcastMessage("To file: " + command);
+
+            if(!event.getMessage().equalsIgnoreCase(command)) {
                 event.setCancelled(true);
                 event.getPlayer().sendMessage(lang.getString("prefix") + lang.getString("error.no-command"));
                 return;
