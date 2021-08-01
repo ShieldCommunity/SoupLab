@@ -9,6 +9,7 @@ import me.jonakls.souppvp.loader.FilesLoader;
 import me.jonakls.souppvp.loader.ListenersLoader;
 import me.jonakls.souppvp.loader.ManagerLoader;
 import me.jonakls.souppvp.manager.KillStreakManager;
+import me.jonakls.souppvp.scoreboard.GameScoreboard;
 import me.jonakls.souppvp.storage.DataStorage;
 import me.jonakls.souppvp.storage.PlayerCache;
 import me.jonakls.souppvp.storage.database.IConnection;
@@ -27,6 +28,7 @@ public class PluginCore implements Core{
     private PlayerCache playerCache;
     private IConnection connection;
     private DataStorage storage;
+    private GameScoreboard gameScoreboard;
 
     public PluginCore(SoupPvP plugin){
         this.plugin = plugin;
@@ -41,6 +43,8 @@ public class PluginCore implements Core{
         killStreakManager = new KillStreakManager();
         killStreakHandler = new KillStreakHandler(filesLoader, killStreakManager);
         playerCache = new PlayerCache(this);
+        gameScoreboard = new GameScoreboard(this);
+        this.database();
 
         managerLoader = new ManagerLoader(this);
         managerLoader.load();
@@ -57,6 +61,9 @@ public class PluginCore implements Core{
         this.storage = new DataStorage(this.connection);
     }
 
+    public void closeDatabase() {
+        this.connection.close();
+    }
 
     private void initLoaders(Loader... loaders){
         for (Loader loader : loaders){
@@ -96,4 +103,8 @@ public class PluginCore implements Core{
     public DataStorage getStorage() {
         return storage;
     }
+    public GameScoreboard gameScoreboard(){
+        return gameScoreboard;
+    }
+
 }
