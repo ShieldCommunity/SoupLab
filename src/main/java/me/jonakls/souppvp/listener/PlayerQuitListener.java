@@ -7,7 +7,7 @@ import org.bukkit.event.player.PlayerQuitEvent;
 
 public class PlayerQuitListener implements Listener {
 
-    private PluginCore pluginCore;
+    private final PluginCore pluginCore;
 
     public PlayerQuitListener(PluginCore pluginCore) {
         this.pluginCore = pluginCore;
@@ -16,5 +16,10 @@ public class PlayerQuitListener implements Listener {
     @EventHandler
     public void onQuit(PlayerQuitEvent event) {
         event.getPlayer().setLevel(0);
+    }
+
+    @EventHandler
+    public void deleteScoreboard(PlayerQuitEvent event) {
+        pluginCore.gameScoreboard().delete(event.getPlayer());
     }
 }
