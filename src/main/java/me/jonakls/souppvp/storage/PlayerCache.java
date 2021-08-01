@@ -1,15 +1,13 @@
 package me.jonakls.souppvp.storage;
 
 import me.jonakls.souppvp.PluginCore;
-import me.jonakls.souppvp.manager.FileManager;
-import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
 import java.util.*;
 
 public class PlayerCache {
 
-    private final PluginCore pluginCore;
+    private final DataStorage storage;
 
     private final List<Player> players;
     private final Map<String, String> id;
@@ -19,7 +17,7 @@ public class PlayerCache {
     private final Map<String, List<String>> kits;
 
     public PlayerCache(PluginCore pluginCore) {
-        this.pluginCore = pluginCore;
+        this.storage = pluginCore.getStorage();
         this.players = new ArrayList<>();
         this.id = new HashMap<>();
         this.kills = new HashMap<>();
@@ -28,12 +26,22 @@ public class PlayerCache {
         this.kits = new HashMap<>();
     }
 
-    public void savePlayerData() {
+    public void forceSaveData() {
+        for (Player player : players) {
+            this.savePlayerData(player);
+        }
+    }
+
+    public void savePlayerData(Player player) {
+        players.remove(player);
+        kills.remove(player.getName());
 
 
     }
 
     public void loadPlayerData(Player player) {
+        players.add(player);
+        kills.put(player.getName(), storage.getKills(player.getUniqueId().toString()));
 
 
     }
