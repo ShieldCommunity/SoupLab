@@ -1,6 +1,7 @@
 package me.jonakls.souppvp.storage;
 
 import me.jonakls.souppvp.storage.database.IConnection;
+import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
 import java.sql.Connection;
@@ -43,7 +44,7 @@ public class DataStorage {
                 PreparedStatement statement = con.prepareStatement(
                         "REPLACE INTO soup(id, name, kills, deaths) VALUES (?, ?, ?, ?)"
                 );
-                statement.setString(1, cache.getId(player));
+                statement.setString(1, cache.getId(player).toLowerCase());
                 statement.setString(2, player.getName());
                 statement.setString(3, "" + cache.getKills(player));
                 statement.setString(4, "" + cache.getDeaths(player));
@@ -57,27 +58,24 @@ public class DataStorage {
         });
     }
 
-    public int getKills(String id) {
-        EXECUTOR.submit(() -> {
-            try {
-                Connection con = connection.getConnection();
-                PreparedStatement statement = con.prepareStatement(
-                        "SELECT * FROM soup WHERE id = " + id
-                );
-                statement.executeQuery();
+    public String getKills(String id) {
+        try {
+            Connection con = connection.getConnection();
+            PreparedStatement statement = con.prepareStatement("SELECT * FROM soup WHERE id = '" + id + "';");
 
-                ResultSet result = statement.getResultSet();
+            ResultSet result = statement.executeQuery();
 
-                if(result.getString("id").equals(id)) {
-                    return Integer.parseInt(result.getString("kills"));
+            while (result.next()) {
+                if(result.getString("id").equalsIgnoreCase(id.toLowerCase())) {
+                    Bukkit.broadcastMessage("Get id: " + result.getString("id"));
+                    Bukkit.broadcastMessage("Get kills: " + result.getString("kills"));
+                    return result.getString("kills");
                 }
-                return 0;
-            }catch (SQLException e) {
-                e.printStackTrace();
             }
-            return 0;
-        });
-        return 0;
+        }catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return "0";
     }
 
 }

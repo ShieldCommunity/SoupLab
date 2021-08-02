@@ -31,8 +31,7 @@ public class ListenersLoader implements Loader {
                 new PlayerDeathListener(pluginCore),
                 new PlayerPickupListener(pluginCore),
                 new BlockBreakListener(pluginCore),
-                new PlayerQuitListener(pluginCore),
-                new BlockCommandsListener(pluginCore)
+                new PlayerQuitListener(pluginCore)
         );
     }
 

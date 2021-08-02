@@ -4,7 +4,6 @@ import fr.mrmicky.fastboard.FastBoard;
 import me.jonakls.souppvp.PluginCore;
 import me.jonakls.souppvp.manager.FileManager;
 import me.jonakls.souppvp.storage.PlayerCache;
-import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
 import java.util.*;

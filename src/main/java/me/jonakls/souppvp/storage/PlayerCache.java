@@ -1,6 +1,7 @@
 package me.jonakls.souppvp.storage;
 
 import me.jonakls.souppvp.PluginCore;
+import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
 import java.util.*;
@@ -33,17 +34,16 @@ public class PlayerCache {
     }
 
     public void savePlayerData(Player player) {
+        storage.insert(this, player);
         players.remove(player);
         kills.remove(player.getName());
-
-
     }
 
     public void loadPlayerData(Player player) {
         players.add(player);
-        kills.put(player.getName(), storage.getKills(player.getUniqueId().toString()));
-
-
+        Bukkit.broadcastMessage("UUID: " + player.getUniqueId().toString());
+        Bukkit.broadcastMessage("Loader data: " + storage.getKills(player.getUniqueId().toString()));
+        //this.kills.put(player.getName(), storage.getKills(player.getUniqueId().toString()));
     }
 
     public void registerPlayer(Player player) {

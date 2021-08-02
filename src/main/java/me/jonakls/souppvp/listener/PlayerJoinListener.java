@@ -4,7 +4,6 @@ import me.jonakls.souppvp.PluginCore;
 import me.jonakls.souppvp.builders.ItemBuilder;
 import me.jonakls.souppvp.enums.GameStatus;
 import me.jonakls.souppvp.loader.FilesLoader;
-import me.jonakls.souppvp.scoreboard.GameScoreboard;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -24,6 +23,7 @@ public class PlayerJoinListener implements Listener {
 
     @EventHandler(priority = EventPriority.MONITOR)
     public void onJoinLoadData(PlayerJoinEvent event) {
+        pluginCore.getPlugin().getServer().getLogger().info("[SoupPvP]: Load data of " + event.getPlayer().getName());
         pluginCore.getPlayerCache().loadPlayerData(event.getPlayer());
     }
 
