@@ -10,7 +10,7 @@ public final class SoupLab extends JavaPlugin {
     @Override
     public void onEnable() {
 
-        getLogger().info("Loading SoupPvP v" + getDescription().getVersion());
+        getLogger().info("Loading SoupLab v" + getDescription().getVersion());
         this.core.init();
 
         getServer().getScheduler().runTaskTimer(this,() -> {
@@ -26,7 +26,7 @@ public final class SoupLab extends JavaPlugin {
 
     @Override
     public void onDisable() {
-        getLogger().info("Closing SoupPvP v" + getDescription().getVersion());
+        getLogger().info("Closing SoupLab v" + getDescription().getVersion());
         getLogger().info("Saving player data...");
         this.core.getPlayerCache().forceSaveData();
         this.core.closeDatabase();
