@@ -86,6 +86,11 @@ public class MainCommand implements CommandExecutor{
                         player
                 );
                 break;
+            case "getData":
+
+                player.sendMessage("Datos");
+                player.sendMessage(player.getName() + ", kills: " + pluginCore.getStorage().getKills(player.getUniqueId().toString()));
+                break;
             case "reload":
                 lang.reload();
                 config.reload();
