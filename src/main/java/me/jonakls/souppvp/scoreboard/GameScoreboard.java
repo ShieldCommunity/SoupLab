@@ -41,6 +41,8 @@ public class GameScoreboard {
 
     public void update(FastBoard fastBoard) {
 
+        fastBoard.updateTitle(lang.getString("scoreboard.title"));
+
         List<String> lines = lang.getStringList("scoreboard.lines");
 
         lines.replaceAll(line -> line
