@@ -1,6 +1,6 @@
-name: SoupPvP
+name: SoupLab
 version: ${project.version}
-main: me.jonakls.souppvp.SoupPvP
+main: me.jonakls.souppvp.SoupLab
 authors: [ Jonakls ]
 commands:
   soup:

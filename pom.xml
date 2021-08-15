@@ -5,11 +5,11 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>me.jonakls</groupId>
-    <artifactId>SoupPvP</artifactId>
+    <artifactId>SoupLab</artifactId>
     <version>1.0-SNAPSHOT</version>
     <packaging>jar</packaging>
 
-    <name>SoupPvP</name>
+    <name>SoupLab</name>
 
     <properties>
         <java.version>1.8</java.version>
