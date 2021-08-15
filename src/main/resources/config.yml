@@ -9,6 +9,13 @@ deny-build: true
 respawn-time: 5
 xp-per-kill: 5
 regeneration-soup-value: 5.0
+database:
+  enable: false
+  database-name: 'SoupPvP'
+  table: 'soup'
+  user: 'root'
+  ip: 'localhost'
+  password: 'mypassword'
 items-join:
   kits:
     material: CHEST
