@@ -9,6 +9,8 @@ public final class SoupPvP extends JavaPlugin {
 
     @Override
     public void onEnable() {
+
+        getServer().getLogger().info("Loading SoupPvP v" + getDescription().getVersion());
         this.core.init();
 
         getServer().getScheduler().runTaskTimer(this,() -> {
@@ -24,7 +26,10 @@ public final class SoupPvP extends JavaPlugin {
 
     @Override
     public void onDisable() {
+        getServer().getLogger().info("Closing SoupPvP v" + getDescription().getVersion());
+        getServer().getLogger().info("Saving player data...");
         this.core.getPlayerCache().forceSaveData();
         this.core.closeDatabase();
+        getServer().getLogger().info("Closed connection, finally!");
     }
 }

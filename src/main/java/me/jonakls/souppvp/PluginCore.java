@@ -39,12 +39,13 @@ public class PluginCore implements Core{
         filesLoader = new FilesLoader(plugin);
         filesLoader.load();
 
+        this.database();
         kitsGUI = new KitsGUI(filesLoader);
         killStreakManager = new KillStreakManager();
         killStreakHandler = new KillStreakHandler(filesLoader, killStreakManager);
         playerCache = new PlayerCache(this);
         gameScoreboard = new GameScoreboard(this);
-        this.database();
+
 
         managerLoader = new ManagerLoader(this);
         managerLoader.load();
@@ -55,10 +56,11 @@ public class PluginCore implements Core{
     }
 
     private void database() {
+        this.getPlugin().getServer().getLogger().info("Loading database...");
         this.connection = new SQLConnection(this);
         this.connection.load();
 
-        this.storage = new DataStorage(this.connection);
+        this.storage = new DataStorage(this.connection, this);
     }
 
     public void closeDatabase() {
