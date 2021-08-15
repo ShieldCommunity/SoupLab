@@ -15,7 +15,8 @@ public class SQLConnection implements IConnection {
     private Connection connection;
 
     public SQLConnection(PluginCore core) {
-        this.file = new File(core.getPlugin().getDataFolder(), core.getPlugin().getName() + ".db");
+        this.file = new File(core.getPlugin().getDataFolder(),
+                core.getFilesLoader().getConfig().getString("database.database-name") + ".db");
 
         if (!file.exists()) {
             try {
@@ -24,7 +25,6 @@ public class SQLConnection implements IConnection {
                 e.printStackTrace();
             }
         }
-
     }
 
     @Override
