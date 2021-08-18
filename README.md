@@ -1,6 +1,6 @@
 # SoupPvP
 
-[![Readme Card](https://github-readme-stats.vercel.app/api/pin/?username=Lably-Team&repo=SoupPvP&theme=tokyonight)](https://github.com/Lably-Team/SoupPvP)
+[![Readme Card](https://github-readme-stats.vercel.app/api/pin/?username=Lably-Team&repo=SoupLab&theme=tokyonight)](https://github.com/Lably-Team/SoupLab)
 
 Basic and simple mini pvp game, consists of regeneration with soups.
 
